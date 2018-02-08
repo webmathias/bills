@@ -1,0 +1,21 @@
+<div class="ui container">
+  <div *ngIf="!data"> Loading</div>
+<table  *ngIf="data" class="ui compact celled definition table">
+  <thead>
+  <tr>
+    <th></th>
+    <th *ngFor="let header of data[0]">{{header}}</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let linha of data">
+    <td class="collapsing">
+      <div class="ui fitted slider checkbox">
+        <input type="checkbox"> <label></label>
+      </div>
+    </td>
+    <td *ngFor="let v of linha">{{v}}</td>
+  </tr>
+  </tbody>
+</table>
+</div>

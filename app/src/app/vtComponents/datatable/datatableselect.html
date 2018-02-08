@@ -1,0 +1,64 @@
+<table class="ui celled table">
+    <thead>
+    <tr>
+        <th colspan="100%">
+            <div class="title">
+                {{label}}
+            </div>
+            <div class="ui right aligned">
+                <div class="ui  search">
+                    <div class="ui icon input">
+                        <input class="prompt" placeholder="Search..." [(ngModel)]="filter">
+                        <i class="search icon"></i>
+                    </div>
+                    <div class="results"></div>
+                </div>
+            </div>
+        </th>
+    </tr>
+    <tr>
+        <th>
+
+            <div class="ui checkbox">
+                <input type="checkbox" name="selectall" (click)="_selectAll()" [(ngModel)]="_selectedall">
+                <label></label>
+            </div>
+        </th>
+        <th *ngFor="let col of columns" class="{{col.typeheadeclass}}">{{col.label}}</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of listCurrentPage">
+        <td>
+            <div class="ui checkbox">
+                <input type="checkbox" name="selectall" (change)="_select(item)" [(ngModel)]="item._selected">
+                <label></label>
+            </div>
+        </td>
+        <td *ngFor="let col of columns" class="{{col.typeclass}}">{{item | columnValue:col.name | numberformat:col.type}}</td>
+    </tr>
+    </tbody>
+    <tfoot>
+    <tr>
+        <td colspan="100%">
+            <div class="ui grid stackable">
+                <div class="eight wide column">
+                    <div class="ui pagination menu ">
+                        <a class="{{p==_currentPage?'active':''}} {{!p?'disabled':''}} item" *ngFor="let p of _pages"
+                           (click)="setPage(p)">
+                            {{p||'...'}}
+                        </a>
+
+                    </div>
+                </div>
+                <div class="eight wide column buttons">
+                    {{_currentPage}}/{{_totalPages}}
+                    <button class="ui button" *ngIf="_selectedCount==1" (click)="_edit()">{{'EDIT' |translate}}</button>
+                    <button class="ui button" *ngIf="_selectedCount" (click)="_remove()">{{'REMOVE' |translate}}
+                    </button>
+                    <button class="ui primary button" (click)="_add($event)">{{'ADD' |translate}}</button>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>

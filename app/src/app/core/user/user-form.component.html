@@ -1,0 +1,18 @@
+<div class="ui header">User</div>
+
+<vt-form class="ui form grid stackable" (submit)="save(model)">
+    <div class="sixteen wide column">
+        <vt-field-text label="name" name="Name" [(ngModel)]="model.name"></vt-field-text>
+    </div>
+    <div class="eight wide column">
+        <vt-field-text label="username" name="Username" [(ngModel)]="model.username"></vt-field-text>
+    </div>
+    <div class="eight wide column">
+        <vt-field-text label="password" name="Password" [(ngModel)]="model.password"></vt-field-text>
+    </div>
+    <div class="sixteen wide column buttons">
+        <button class="ui primary left button" type="submit" [ngClass]="userService.loading?'loading disabled':''">
+            {{'SAVE' | translate}}
+        </button>
+    </div>
+</vt-form>

@@ -1,0 +1,14 @@
+{
+    "name": {
+        "type": "String",
+        "default": ""
+    },
+    "type": {
+        "type": "Number",
+        "default": 0
+    },
+    "cor": {
+        "type": "String",
+        "default": "'#FFFFFF'"
+    }
+}

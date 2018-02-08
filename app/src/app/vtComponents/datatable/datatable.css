@@ -1,0 +1,67 @@
+:host /deep/ .center {
+    text-align: center;
+}
+
+:host /deep/ .title {
+    text-align: left;
+    float: left;
+    margin: auto;
+    font-family: Roboto;
+    font-size: 18px;
+
+}
+
+:host /deep/ .buttons {
+    text-align: right;
+    float: right;
+}
+
+:host /deep/ table {
+    width: 100%;
+    font-family: Roboto;
+    font-size: 12px;
+    color: #000000;
+}
+
+:host /deep/ table th {
+    height:auto;
+    font-family: Roboto;
+    font-size: 12px;
+    color: #888888;
+    white-space: nowrap;
+    vertical-align: middle;
+    padding: 8px;
+}
+
+:host /deep/ table th:nth-child(2) {
+    width: 100%;
+}
+
+:host /deep/ table tr:hover {
+    background-color: #EEEEEE;
+}
+
+:host /deep/ table tr td {
+    padding: 4px;
+}
+
+:host /deep/ .colnumber {
+    text-align: right;
+}
+
+:host /deep/ .colstring {
+    text-align: left;
+}
+
+:host /deep/ .colnumber_header {
+    text-align: center;
+
+}
+
+:host /deep/ .colstring_header {
+    text-align: center;
+}
+
+:host /deep/ .colcheck {
+    width: 5%;
+}

@@ -1,0 +1,32 @@
+<div class="ui header">Entry</div>
+
+<vt-form class="ui form grid stackable" (submit)="save(model)">
+  <div class="sixteen wide column">
+    <vt-field-text label="Description" name="Description" [(ngModel)]="model.description"></vt-field-text>
+  </div>
+  <div class="eight wide column">
+    <vt-field-select optionlabel="name" label="Category" name="category" [(ngModel)]="model.category"
+                     [options]="categories"></vt-field-select>
+  </div>
+  <div class="eight wide column">
+    <vt-field-select label="Bank" name="Bank" [options]="banks" optionlabel="name"
+                     [(ngModel)]="model.bank"></vt-field-select>
+  </div>
+  <div class="four wide column">
+    <vt-field-number label="Value" name="Value" [(ngModel)]="model.value"></vt-field-number>
+  </div>
+  <div class="four wide column">
+    <vt-field-date label="Date" name="Date" [(ngModel)]="model.date"></vt-field-date>
+  </div>
+  <div class="four wide column">
+    <vt-field-boolean label="Confirmed" name="Confirmed" [(ngModel)]="model.confirmed"></vt-field-boolean>
+  </div>
+  <div class="four wide column">
+    <vt-field-boolean label="Crédito" name="Credito" [(ngModel)]="model.credito"></vt-field-boolean>
+  </div>
+  <div class="sixteen wide column buttons">
+    <button class="ui primary left button" type="submit" [ngClass]="entryService.loading?'loading disabled':''">
+      {{'SAVE' | translate}}
+    </button>
+  </div>
+</vt-form>

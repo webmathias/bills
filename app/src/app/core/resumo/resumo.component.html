@@ -1,0 +1,269 @@
+<div class="ui middle aligned center aligned grid">
+  <div class="column">
+    <div class="ui pagination menu">
+      <a class="{{p==_currentPage?'active':''}} item" *ngFor="let p of meses"
+         (click)="updateResumo(p)">
+        {{p||'...'}}
+      </a>
+      <select  class="ui dropdown" [(ngModel)]="currentYear">
+        <option value="2016">2016</option>
+        <option value="2017">2017</option>
+        <option value="2018">2018</option>
+        <option value="2019">2019</option>
+      </select>
+    </div>
+  </div>
+</div>
+<table class="ui celled table" *ngIf="!loading">
+  <thead>
+  <tr>
+    <!--<div class="column right aligned">Inicial</div>-->
+    <th class="right aligned" width="1%"></th>
+    <th>Conta</th>
+    <th class="right aligned">Entrada</th>
+    <th class="right aligned">Saida</th>
+    <th class="right aligned">Total</th>
+    <th class="right aligned">Entrada Conf.</th>
+    <th class="right aligned">Saida Conf.</th>
+    <th class="right aligned">Total</th>
+    <th class="right aligned positive">Saldo</th>
+    <th class="right aligned positive">Saldo Previsto</th>
+  </tr>
+  </thead>
+  <tbody>
+  <ng-container *ngFor="let item of resume">
+    <tr (click)="updateResumoCat(item)" class="{{currentExpand == item?'positive':''}}">
+      <td><img src="/assets/images/bank.svg" *ngIf="currentExpand == item"></td>
+      <td>{{item._id.bank.name}}</td>
+      <td class="right aligned {{(item.value.entrada)<0?'negativo':''}}">
+        {{(item.value.entrada) | numberformat:'R$ '}}
+      </td>
+      <td class="right aligned {{(item.value.saida)<0?'negativo':''}}">
+        {{(item.value.saida) | numberformat:'R$ '}}
+      </td>
+      <td class="right aligned {{(item.value.entrada + item.value.saida)<0?'negativo':''}}">
+        {{(item.value.entrada + item.value.saida) | numberformat:'R$ '}}
+      </td>
+      <td class="right aligned {{(item.value.entradaConfirmada)<0?'negativo':''}}">
+        {{(item.value.entradaConfirmada) | numberformat:'R$ '}}
+      </td>
+      <td class="right aligned {{(item.value.saidaConfirmada)<0?'negativo':''}}">
+        {{(item.value.saidaConfirmada) | numberformat:'R$ '}}
+      </td>
+      <td class="right aligned {{(item.value.entradaConfirmada + item.value.saidaConfirmada)<0?'negativo':''}}">
+        {{(item.value.entradaConfirmada + item.value.saidaConfirmada) | numberformat:'R$ '}}
+      </td>
+      <td class="right aligned positive {{(item.value.saldo)<0?'negativo':''}}">
+        {{(item.value.saldo) | numberformat:'R$ '}}
+      </td>
+      <td class="right aligned positive {{(item.value.saldo+(item.value.entrada + item.value.saida))<0?'negativo':''}}">
+        {{(item.value.saldo+(item.value.entrada + item.value.saida)) | numberformat:'R$ '}}
+      </td>
+    </tr>
+    <ng-container *ngIf="currentExpand == item">
+      <ng-container *ngFor="let subitem of currentExpand.resumeCat">
+        <tr (click)="updateResumoEntry(item, subitem)" class="{{currentExpandEntry == subitem?'positive':'active'}}">
+          <td><img src="/assets/images/category.svg" *ngIf="currentExpandEntry == subitem"></td>
+          <td class="right aligned ">{{subitem._id.category.name}}</td>
+
+          <td class="right aligned {{(subitem.value.entrada)<0?'negativo':''}}">
+            {{(subitem.value.entrada) | numberformat:'R$ '}}
+          </td>
+          <td class="right aligned {{(subitem.value.saida)<0?'negativo':''}}">
+            {{(subitem.value.saida) | numberformat:'R$ '}}
+          </td>
+          <td class="right aligned {{(subitem.value.entrada + subitem.value.saida)<0?'negativo':''}}">
+            {{(subitem.value.entrada + subitem.value.saida) | numberformat:'R$ '}}
+          </td>
+
+          <td class="right aligned {{(subitem.value.entradaConfirmada)<0?'negativo':''}}">
+            {{(subitem.value.entradaConfirmada) | numberformat:'R$ '}}
+          </td>
+          <td class="right aligned {{(subitem.value.saidaConfirmada)<0?'negativo':''}}">
+            {{(subitem.value.saidaConfirmada) | numberformat:'R$ '}}
+          </td>
+          <td
+            class="right aligned {{(subitem.value.entradaConfirmada + subitem.value.saidaConfirmada)<0?'negativo':''}}">
+            {{(subitem.value.entradaConfirmada + subitem.value.saidaConfirmada) | numberformat:'R$ '}}
+          </td>
+          <td class="right aligned  {{(item.value.saldo)<0?'negativo':''}}">
+            -
+          </td>
+        </tr>
+        <!-- Sub itens Entradas-->
+        <ng-container *ngIf="currentExpandEntry == subitem">
+          <tr *ngFor="let subitementry of currentExpandEntry.resumeEntry" class="active">
+            <td><img src="/assets/images/entry.svg"></td>
+            <td class="right aligned ">{{subitementry._id.entry.description}}</td>
+
+            <td class="right aligned {{(subitementry.value.entrada)<0?'negativo':''}}">
+              {{(subitementry.value.entrada) | numberformat:'R$ '}}
+            </td>
+            <td class="right aligned {{(subitementry.value.saida)<0?'negativo':''}}">
+              {{(subitementry.value.saida) | numberformat:'R$ '}}
+            </td>
+            <td class="right aligned {{(subitementry.value.entrada + subitementry.value.saida)<0?'negativo':''}}">
+              {{(subitementry.value.entrada + subitementry.value.saida) | numberformat:'R$ '}}
+            </td>
+
+            <td class="right aligned {{(subitementry.value.entradaConfirmada)<0?'negativo':''}}">
+              {{(subitementry.value.entradaConfirmada) | numberformat:'R$ '}}
+            </td>
+            <td class="right aligned {{(subitementry.value.saidaConfirmada)<0?'negativo':''}}">
+              {{(subitementry.value.saidaConfirmada) | numberformat:'R$ '}}
+            </td>
+            <td
+              class="right aligned {{(subitementry.value.entradaConfirmada + subitementry.value.saidaConfirmada)<0?'negativo':''}}">
+              {{(subitementry.value.entradaConfirmada + subitementry.value.saidaConfirmada) | numberformat:'R$ '}}
+            </td>
+            <td class="right aligned {{(item.value.saldo)<0?'negativo':''}}">
+              -
+            </td>
+
+          </tr>
+        </ng-container>
+      </ng-container>
+    </ng-container>
+
+    <!-- FIM Sub itens Entradas-->
+
+
+  </ng-container>
+  <tr class="positive" (click)="updateResumoCat(total)">
+    <td>
+      <div class="ui ribbon label">Total</div>
+    </td>
+    <td></td>
+
+    <td class="right aligned {{(total.value.entrada)<0?'negativo':''}}">
+      {{(total.value.entrada) | numberformat:'R$ '}}
+    </td>
+    <td class="right aligned {{(total.value.saida)<0?'negativo':''}}">
+      {{(total.value.saida) | numberformat:'R$ '}}
+    </td>
+    <td class="right aligned {{(total.value.entrada + total.value.saida)<0?'negativo':''}}">
+      {{(total.value.entrada + total.value.saida) | numberformat:'R$ '}}
+    </td>
+
+    <td class="right aligned {{(total.value.entradaConfirmada)<0?'negativo':''}}">
+      {{(total.value.entradaConfirmada) | numberformat:'R$ '}}
+    </td>
+    <td class="right aligned {{(total.value.saidaConfirmada)<0?'negativo':''}}">
+      {{(total.value.saidaConfirmada) | numberformat:'R$ '}}
+    </td>
+    <td class="right aligned {{(total.value.entradaConfirmada + total.value.saidaConfirmada)<0?'negativo':''}}">
+      {{(total.value.entradaConfirmada + total.value.saidaConfirmada) | numberformat:'R$ '}}
+    </td>
+    <td class="right aligned {{(total.value.saldo)<0?'negativo':''}}">
+      {{(total.value.saldo) | numberformat:'R$ '}}
+    </td>
+    <td class="right aligned {{(total.value.saldo+(total.value.entrada + total.value.saida))<0?'negativo':''}}">
+      {{(total.value.saldo+(total.value.entrada + total.value.saida)) | numberformat:'R$ '}}
+    </td>
+
+
+  </tr>
+  <ng-container *ngIf="currentExpand == total">
+    <ng-container *ngFor="let subitem of currentExpand.resumeCat">
+      <tr (click)="updateResumoEntry(item, subitem)" class="{{currentExpandEntry == subitem?'positive':'active'}}">
+        <td><img src="/assets/images/category.svg" *ngIf="currentExpandEntry == subitem"></td>
+        <td class="right aligned ">{{subitem._id.category.name}}</td>
+
+        <td class="right aligned {{(subitem.value.entrada)<0?'negativo':''}}">
+          {{(subitem.value.entrada) | numberformat:'R$ '}}
+        </td>
+        <td class="right aligned {{(subitem.value.saida)<0?'negativo':''}}">
+          {{(subitem.value.saida) | numberformat:'R$ '}}
+        </td>
+        <td class="right aligned {{(subitem.value.entrada + subitem.value.saida)<0?'negativo':''}}">
+          {{(subitem.value.entrada + subitem.value.saida) | numberformat:'R$ '}}
+        </td>
+
+        <td class="right aligned {{(subitem.value.entradaConfirmada)<0?'negativo':''}}">
+          {{(subitem.value.entradaConfirmada) | numberformat:'R$ '}}
+        </td>
+        <td class="right aligned {{(subitem.value.saidaConfirmada)<0?'negativo':''}}">
+          {{(subitem.value.saidaConfirmada) | numberformat:'R$ '}}
+        </td>
+        <td
+          class="right aligned {{(subitem.value.entradaConfirmada + subitem.value.saidaConfirmada)<0?'negativo':''}}">
+          {{(subitem.value.entradaConfirmada + subitem.value.saidaConfirmada) | numberformat:'R$ '}}
+        </td>
+        <td class="right aligned">
+          -
+        </td>
+
+      </tr>
+      <!-- Sub itens Entradas-->
+      <ng-container *ngIf="currentExpandEntry == subitem">
+        <tr *ngFor="let subitementry of currentExpandEntry.resumeEntry" class="active">
+          <td><img src="/assets/images/entry.svg"></td>
+          <td class="right aligned ">{{subitementry._id.entry.description}}</td>
+
+          <td class="right aligned {{(subitementry.value.entrada)<0?'negativo':''}}">
+            {{(subitementry.value.entrada) | numberformat:'R$ '}}
+          </td>
+          <td class="right aligned {{(subitementry.value.saida)<0?'negativo':''}}">
+            {{(subitementry.value.saida) | numberformat:'R$ '}}
+          </td>
+          <td class="right aligned {{(subitementry.value.entrada + subitementry.value.saida)<0?'negativo':''}}">
+            {{(subitementry.value.entrada + subitementry.value.saida) | numberformat:'R$ '}}
+          </td>
+
+          <td class="right aligned {{(subitementry.value.entradaConfirmada)<0?'negativo':''}}">
+            {{(subitementry.value.entradaConfirmada) | numberformat:'R$ '}}
+          </td>
+          <td class="right aligned {{(subitementry.value.saidaConfirmada)<0?'negativo':''}}">
+            {{(subitementry.value.saidaConfirmada) | numberformat:'R$ '}}
+          </td>
+          <td
+            class="right aligned {{(subitementry.value.entradaConfirmada + subitementry.value.saidaConfirmada)<0?'negativo':''}}">
+            {{(subitementry.value.entradaConfirmada + subitementry.value.saidaConfirmada) | numberformat:'R$ '}}
+          </td>
+          <td class="right aligned">
+          </td>
+
+        </tr>
+      </ng-container>
+    </ng-container>
+  </ng-container>
+  <tr class="positive">
+
+    <td>
+      <div class="ui ribbon label">Poupança</div>
+    </td>
+    <td></td>
+    <td class="right aligned {{(npoupanca.value.entrada)<0?'negativo':''}}">
+      {{(npoupanca.value.entrada) | numberformat:'R$ '}}
+    </td>
+    <td class="right aligned {{(npoupanca.value.saida)<0?'negativo':''}}">
+      {{(npoupanca.value.saida) | numberformat:'R$ '}}
+    </td>
+    <td class="right aligned {{(npoupanca.value.entrada + npoupanca.value.saida)<0?'negativo':''}}">
+      {{(npoupanca.value.entrada + npoupanca.value.saida) | numberformat:'R$ '}}
+    </td>
+
+    <td class="right aligned {{(npoupanca.value.entradaConfirmada)<0?'negativo':''}}">
+      {{(npoupanca.value.entradaConfirmada) | numberformat:'R$ '}}
+    </td>
+    <td class="right aligned {{(npoupanca.value.saidaConfirmada)<0?'negativo':''}}">
+      {{(npoupanca.value.saidaConfirmada) | numberformat:'R$ '}}
+    </td>
+    <td class="right aligned {{(npoupanca.value.entradaConfirmada + npoupanca.value.saidaConfirmada)<0?'negativo':''}}">
+      {{(npoupanca.value.entradaConfirmada + npoupanca.value.saidaConfirmada) | numberformat:'R$ '}}
+    </td>
+    <td class="right aligned {{(npoupanca.value.saldo)<0?'negativo':''}}">
+      {{(npoupanca.value.saldo) | numberformat:'R$ '}}
+    </td>
+    <td
+      class="right aligned {{(npoupanca.value.saldo+(npoupanca.value.entrada + npoupanca.value.saida))<0?'negativo':''}}">
+      {{(npoupanca.value.saldo+(npoupanca.value.entrada + npoupanca.value.saida)) | numberformat:'R$ '}}
+    </td>
+
+  </tr>
+  </tbody>
+</table>
+<div class="chart1">
+  <chart-resumo-categoria class="ui container"
+                          [data]="currentExpand? currentExpand.resumeCat: []"></chart-resumo-categoria>
+</div>

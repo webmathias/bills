@@ -1,0 +1,36 @@
+<vt-form class="ui form" (submit)="newEntry()">
+  <div class="ui message" *ngFor="let model of novos">
+    <div class="ui grid" [ngClass]="model.value<0?'negativo':'positivo'">
+      <div class="column five wide">
+        <vt-field-text label="Descrição" name="description"
+                       [(ngModel)]="model.description"></vt-field-text>
+      </div>
+      <div class="column five wide">
+        <vt-field-select label="Bank" name="Bank" [options]="banks" optionlabel="name"
+                         [(ngModel)]="model.bank"></vt-field-select>
+      </div>
+      <div class="column five wide">
+        <vt-field-select optionlabel="name" label="Category" name="category" [(ngModel)]="model.category"
+                         [options]="categories"></vt-field-select>
+      </div>
+      <div class="column five wide">
+        <vt-field-date label="Data" name="Data" [(ngModel)]="model.date"></vt-field-date>
+      </div>
+      <div class="column five wide">
+        <vt-field-number label="Value" name="Value" [(ngModel)]="model.value"></vt-field-number>
+      </div>
+      <div class="column four wide">
+        <vt-field-boolean label="Crédito" name="Credito" [(ngModel)]="model.credito"></vt-field-boolean>
+      </div>
+
+    </div>
+  </div>
+  <div class="column one wide">
+    <button class="ui primary left button" (click)="save()"
+            [ngClass]="entryService.loading?'loading disabled':''">
+      {{'SAVE' | translate}}
+    </button>
+
+  </div>
+
+</vt-form>

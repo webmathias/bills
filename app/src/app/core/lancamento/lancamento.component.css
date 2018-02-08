@@ -1,0 +1,12 @@
+.positivo >>> vt-field-number .field>label {
+  color: #0ea432;
+}
+.positivo >>> vt-field-number .field>input{
+  background-color: #a0cca7;
+}
+.negativo >>> vt-field-number .field>label{
+  color: #9e1317;
+}
+.negativo >>> vt-field-number .field>input{
+  background-color: #cca1a7;
+}

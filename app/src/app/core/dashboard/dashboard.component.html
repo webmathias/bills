@@ -1,0 +1,15 @@
+<div class="ui message">
+  <div class="header">{{title}}</div>
+  <div class="ui grid">
+    <div class="chart2">
+      <chart1 [(selectedDate)]="selectedDate" class="ui container"></chart1>
+    </div>
+  </div>
+</div>
+<div class="ui message">
+  <div class="header">{{title}}</div>
+  <div class="ui container">
+      <chart2 [selectedDate]="selectedDate" class="ui grid"></chart2>
+      <!--<dinamictable  class="ui container" ></dinamictable>-->
+  </div>
+</div>

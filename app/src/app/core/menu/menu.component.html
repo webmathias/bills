@@ -1,0 +1,48 @@
+<div class="dimmed pusher">
+    <div class="ui grid">
+        <div class="three wide column">
+            <div class="ui vertical menu">
+                <a class="{{isActiveMenu('dashboard')?'active':''}} item"
+                   [routerLink]="['dashboard']">Dashboard</a>
+                <a class="{{isActiveMenu('pendencias')?'active':''}} item"
+                   [routerLink]="['pendencias']">Pendencias</a>
+                <a class="{{isActiveMenu('lancamento')?'active':''}} item"
+                   [routerLink]="['lancamento']">Novo Lançamento</a>
+                <a class="{{isActiveMenu('Resumo')?'active':''}} item"
+                   [routerLink]="['Resumo']">Resumo</a>
+                <a class="{{isActiveMenu('entry')?'active':''}} item" [routerLink]="['entry']">
+                    Lancamentos</a>
+                <a class="{{isActiveMenu('category')?'active':''}} item"
+                   [routerLink]="['category']">
+                    Categorias
+                </a>
+                <a class="{{isActiveMenu('bank')?'active':''}} item" [routerLink]="['bank']">
+                    Bancos
+                </a>
+                <!--<a class="{{isActiveMenu('user')?'active':''}} item" [routerLink]="['user']">-->
+                    <!--Usuários-->
+                <!--</a>-->
+                <!--<a class="{{isActiveMenu('Importar')?'active':''}} item"-->
+                   <!--[routerLink]="['Importar']">Importar</a>-->
+                <div class="item">
+                    <div class="text menu" *ngFor="let saldo of entryService.saldos">
+                        <div class="item">
+                            {{saldo._id.bank.name}}<br/>
+                            {{saldo.value + saldo._id.bank.intialvalue | numberformat:'R$ '}}
+                            <br/>
+                            <small class="right aligned {{(saldo.valueNotConfirmed)<0?'negativo':''}}">
+                                {{saldo.valueNotConfirmed | numberformat:'R$ '}}
+                            </small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="twelve wide stretched column">
+            <div class="ui segment">
+                <button class="ui button right floated" (click)="logoff()">Sair</button>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+</div>

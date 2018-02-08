@@ -1,0 +1,19 @@
+:host .negativo {
+  color: #ff3333;
+}
+
+
+.chart1 {
+  width: 800px;
+  height: 400px;
+}
+
+.chart2 {
+  width: 100%;
+  height: 400px;
+}
+
+
+.ativo path {
+  fill: green;
+}

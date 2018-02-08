@@ -1,0 +1,12 @@
+.positivo div small{
+  color: #0ea432;
+}
+.positivo div input{
+  background-color: #a0cca7;
+}
+.negativo div small{
+  color: #9e1317;
+}
+.negativo div input{
+  background-color: #cca1a7;
+}

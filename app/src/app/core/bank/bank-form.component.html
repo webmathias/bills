@@ -1,0 +1,31 @@
+<div class="ui header">Bank</div>
+
+<vt-form class="ui form grid stackable" (submit)="save(model)">
+    <div class="four wide column">
+        <vt-field-text label="Name" name="name" [(ngModel)]="model.name"></vt-field-text>
+    </div>
+    <div class="four wide column">
+        <vt-field-number label="Number" name="number" [(ngModel)]="model.number"></vt-field-number>
+    </div>
+    <div class="four wide column">
+        <vt-field-number label="Bank" name="bank" [(ngModel)]="model.bank"></vt-field-number>
+    </div>
+    <div class="four wide column">
+        <vt-field-number label="Account" name="account" [(ngModel)]="model.account"></vt-field-number>
+    </div>
+    <div class="four wide column">
+        <vt-field-currency label="Intial Value" name="initialvalue" [(ngModel)]="model.intialvalue"></vt-field-currency>
+    </div>
+    <div class="four wide column">
+        <vt-field-date label="data" name="Data" [(ngModel)]="model.data"></vt-field-date>
+    </div>
+    <div class="one wide column">
+        <vt-field-boolean label="Active" name="active" [(ngModel)]="model.active"></vt-field-boolean>
+        <vt-field-boolean label="Save Account" name="saveaccount" [(ngModel)]="model.saveaccount"></vt-field-boolean>
+    </div>
+    <div class="sixteen wide column buttons">
+        <button class="ui primary left button" type="submit" [ngClass]="bankService.loading?'loading disabled':''">
+            {{'SAVE' | translate}}
+        </button>
+    </div>
+</vt-form>

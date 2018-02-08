@@ -1,0 +1,13 @@
+<div class="ui header">Category</div>
+
+<vt-form class="ui form grid stackable" (submit)="save(model)">
+    <div class="twelve wide column">
+        <vt-field-text label="Name" name="Name" [(ngModel)]="model.name"></vt-field-text>
+    </div>
+    <div class="sixteen wide column buttons">
+        <button class="ui primary left button" type="submit" [ngClass]="categoryService.loading?'loading disabled':''">
+            {{'SAVE' | translate}}
+        </button>
+    </div>
+
+</vt-form>

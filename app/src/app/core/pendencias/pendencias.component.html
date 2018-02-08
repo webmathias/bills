@@ -1,0 +1,109 @@
+<div class="ui top attached tabular menu">
+  <div [ngClass]="currenttab == 0?'active':''" (click)="currenttab = 0" class="item">Saidas</div>
+  <div [ngClass]="currenttab == 1?'active':''" (click)="currenttab = 1" class="item">Entradas</div>
+  <div [ngClass]="currenttab == 2?'active':''" (click)="currenttab = 2" class="item">Cartão de Crédito</div>
+  <div [ngClass]="currenttab == 3?'active':''" (click)="currenttab = 3" class="item">Previsão</div>
+</div>
+<div class="ui bottom attached active tab segment">
+  <div *ngIf="currenttab == 0" class="ui grid">
+    <div class="four column row" *ngFor="let model of pendenciasSaidas" [ngClass]="model.value < 0?'negativo':'positivo'">
+      <div class="column">
+        {{model.description}}
+        <br/><small>{{model.date | dateformat}}</small>
+      </div>
+      <div class="column">
+        {{getBankName(model.bank)}}<br>
+        <small>{{getCategoryName(model.category)}}</small>
+      </div>
+      <div class="column ui">
+        <small>Valor:</small><br/>
+        <div class="ui input">
+          <input style="text-align: right;" [(ngModel)]="model.value">
+        </div>
+      </div>
+      <div class="column bottom aligned">
+        <button class="ui icon button " (click)="confirmarSaida(model)"
+                [ngClass]="entryService.loading?'loading disabled':''">
+          Confirmar
+        </button>
+
+      </div>
+    </div>
+  </div>
+  <div *ngIf="currenttab == 1" class="ui grid">
+    <div class="four column row" *ngFor="let model of pendenciasEntradas" [ngClass]="model.value < 0?'negativo':'positivo'">
+      <div class="column">
+        {{model.description}}
+        <br/><small>{{model.date | dateformat}}</small>
+      </div>
+      <div class="column">
+        {{getBankName(model.bank)}}<br>
+        <small>{{getCategoryName(model.category)}}</small>
+      </div>
+      <div class="column ui">
+        <small>Valor:</small><br/>
+        <div class="ui input">
+          <input style="text-align: right;" [(ngModel)]="model.value">
+        </div>
+      </div>
+      <div class="column bottom aligned">
+        <button class="ui icon button " (click)="confirmarEntrada(model)"
+                [ngClass]="entryService.loading?'loading disabled':''">
+          Confirmar
+        </button>
+
+      </div>
+    </div>
+  </div>
+  <div *ngIf="currenttab == 2" class="ui grid">
+    <div class="four column row" *ngFor="let model of pendenciasCredito" [ngClass]="model.value < 0?'negativo':'positivo'">
+      <div class="column">
+        {{model.description}}
+        <br/><small>{{model.date | dateformat}}</small>
+      </div>
+      <div class="column">
+        {{getBankName(model.bank)}}<br>
+        <small>{{getCategoryName(model.category)}}</small>
+      </div>
+      <div class="column ui">
+        <small>Valor:</small><br/>
+        <div class="ui input">
+          <input style="text-align: right;" [(ngModel)]="model.value">
+        </div>
+      </div>
+      <div class="column bottom aligned">
+        <button class="ui icon button " (click)="confirmarCredito(model)"
+                [ngClass]="entryService.loading?'loading disabled':''">
+          Confirmar
+        </button>
+
+      </div>
+    </div>
+  </div>
+  <div *ngIf="currenttab == 3" class="ui grid">
+    <div class="four column row" *ngFor="let model of pendencias" [ngClass]="model.value < 0?'negativo':'positivo'">
+      <div class="column">
+        {{model.description}}
+        <br/><small>{{model.date | dateformat}}</small>
+      </div>
+      <div class="column">
+        {{getBankName(model.bank)}}<br>
+        <small>{{getCategoryName(model.category)}}</small>
+      </div>
+      <div class="column ui">
+        <small>Valor:</small><br/>
+        <div class="ui input">
+          <input style="text-align: right;" [(ngModel)]="model.value">
+        </div>
+      </div>
+      <div class="column bottom aligned">
+        <button class="ui icon button " (click)="confirmar(model)"
+                [ngClass]="entryService.loading?'loading disabled':''">
+          Confirmar
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
+

@@ -1,0 +1,26 @@
+{
+    "description": {
+        "type": "String",
+        "default": ""
+    },
+    "category": {
+        "type": "String",
+        "default": ""
+    },
+    "bank": {
+        "type": "String",
+        "default": ""
+    },
+    "value": {
+        "type": "Number",
+        "default": "0"
+    },
+    "date": {
+        "type": "Date",
+        "default": "Date.now"
+    },
+    "confirmed": {
+        "type": "Boolean",
+        "default": "false"
+    }
+}

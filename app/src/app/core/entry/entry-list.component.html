@@ -1,0 +1,10 @@
+<vt-datatable-select (edit)="_edit($event)" (remove)="_remove($event)" (add)="_new()"
+                     [(list)]="lista" label="Entry">
+    <vt-column name="description" type="String" label="Description"></vt-column>
+    <vt-column name="category.name" type="String" label="Category"></vt-column>
+    <vt-column name="bank.name" type="String" label="Bank"></vt-column>
+    <vt-column name="value" type="number" label="Value"></vt-column>
+    <vt-column name="date" type="String" label="Date"></vt-column>
+    <vt-column name="confirmed" label="Confirmed"></vt-column>
+    <vt-column name="credito" label="Crédito"></vt-column>
+</vt-datatable-select>
